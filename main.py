@@ -21,7 +21,8 @@ def password_leaner(password):
                 found_match = password[i:i+j]
 
         if len(found_match) > 0:
-
+            # In Leet speak to Latin char there are only 6 multiple mappings for a character
+            # for simplification sake we only consider the first and (for most chars) only one correspondence
             linted_pass = linted_pass + LEET_REVERSE_MAPPER[found_match][0]
 
         else:

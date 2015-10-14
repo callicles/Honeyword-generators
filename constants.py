@@ -33,5 +33,6 @@ for letter, charList in LEET_MAPPER.iteritems():
             LEET_REVERSE_MAPPER[char].append(letter)
         else:
             LEET_REVERSE_MAPPER[char] = [letter]
+
         if len(char) > MAX_LEET_CHAR:
             MAX_LEET_CHAR = len(char)
