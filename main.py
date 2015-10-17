@@ -1,6 +1,6 @@
 from constants import MAX_LEET_CHAR, ENGLISH_INDEX, LEET_MAPPER, LEET_REVERSE_MAPPER
 import pprint
-import mutators.numbers1
+import mutators.numbers
 
 pp = pprint.PrettyPrinter(indent=1)
 
@@ -76,7 +76,7 @@ def password_leaner(password):
 
 
 pp.pprint(password_leaner("!!n0t.@n0th3r.d@mn.p@$$w0rd!!"))
-print mutators.numbers1.mutate_all_odds("135")
-print mutators.numbers1.mutate_all_even("028")
-print mutators.numbers1.mutate_random("2398")
-print mutators.numbers1.mutate_sequence("2345")
+print mutators.numbers.mutate_all_odds("135")
+print mutators.numbers.mutate_all_even("028")
+print mutators.numbers.mutate_random("2398")
+print mutators.numbers.mutate_sequence("2345")
