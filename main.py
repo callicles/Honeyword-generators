@@ -1,4 +1,4 @@
-from constants import MAX_LEET_CHAR, ENGLISH_INDEX, LEET_MAPPER, LEET_REVERSE_MAPPER
+from constants import MAX_LEET_CHAR, ENGLISH_INDEX, LEET_REVERSE_MAPPER
 import pprint
 import mutators.numbers
 

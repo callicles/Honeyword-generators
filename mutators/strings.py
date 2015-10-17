@@ -1,12 +1,12 @@
 import nltk
 from textblob import Word
 from random import shuffle, randint, choice
+from constants import LEET_MAPPER
 
-__author__ = 'nicolas'
 nltk.download('wordnet')
 
 
-def change_word(word):
+def change_semantic_word(word):
     """ Get another word close to the requested word to replace it
     :param word: Word to replace
     :return: new word
@@ -54,10 +54,59 @@ def mutate_sequence(string):
     :param string: string with a sequence
     :return: another string with a different sequence
     """
+    if len(string) < 25:
+        start_index = randint(0, 26 - len(string))
+    else:
+        start_index = randint(0, 25)
+
+    new_sequence = ""
+    for i in range(len(string)):
+        new_sequence += string.ascii_lowercase[(start_index + i) % 26]
+
+    return new_sequence
 
 
-def mutate_special_chars(special_chars):
-    """ Change some special chars into other
-    :param special_chars:
-    :return:
+def change_syntactic_word(word):
+    """ Change the word in a syntactic manner
+    :param word: word to be changed
+    :return: other word that is syntactically close to the first one
     """
+    # TODO with word net or dictionary
+
+
+def mutate_leet_speak(string):
+    """ change some letters in the string to be in leet speak
+    :param string: string to be mutated
+    :return: Leet speak string
+    """
+    # We only want to change maximum half of the word
+    number_of_changes = randint(1, len(string) / 2)
+    written_changes = 0
+    new_string = ""
+
+    for c in string:
+        if randint(0, 1) == 1 and written_changes < number_of_changes:
+            new_string += LEET_MAPPER[c]
+        else:
+            new_string += c
+
+    return new_string
+
+
+def mutate_caps(string):
+    """ Change caps in the string
+    :param string: string to change caps
+    :return: mutated string
+    """
+    # We only want to change maximum half of the word
+    number_of_changes = randint(1, len(string) / 2)
+    written_changes = 0
+    new_string = ""
+
+    for c in string:
+        if randint(0, 1) == 1 and written_changes < number_of_changes:
+            new_string += c.upper()
+        else:
+            new_string += c
+
+    return new_string
