@@ -14,7 +14,7 @@ def classifier(token):
 		odd number, 
 		mixed characters
 	"""
-	
+
 	#check if token is a single character
 	if len(token) == 1:
 		#check if is an alphabet
@@ -39,7 +39,7 @@ def classifier(token):
 			evenCount = 0
 			oddCount = 0
 			for x in range(len(token)):
-				if token[x]%2 ==0:
+				if int(token[x])%2 ==0:
 					evenCount+=1
 				else:
 					oddCount+=1
@@ -48,7 +48,7 @@ def classifier(token):
 			elif oddCount == len(token):
 				return "AllOddDigits"
 			else:
-				if token%2 == 0:
+				if int(token)%2 == 0:
 					return "EvenNumber"
 				else:
 					return "OddNumber"
