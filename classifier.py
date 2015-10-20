@@ -1,4 +1,4 @@
-import enchant
+from constants import ENGLISH_INDEX
 
 def classifier(token):
 	""" Classifies the given token into one of several categories.
@@ -14,11 +14,7 @@ def classifier(token):
 		odd number, 
 		mixed characters
 	"""
-
-	#initialise dictionaries for English words
-	USEnglishDict = enchant.Dict("en_US")
-	GBEnglishDict = enchant.Dict("en_GB")
-
+	
 	#check if token is a single character
 	if len(token) == 1:
 		#check if is an alphabet
@@ -34,7 +30,7 @@ def classifier(token):
 	else:
 		#check if token is a string of alphabets, check if a dictionary word or not
 		if token.isalpha():
-			if USEnglishDict.check(token) or GBEnglishDict.check(token):
+			if token in ENGLISH_INDEX:
 				return "DictionaryWord"
 			else:
 				return "RandomWord"
