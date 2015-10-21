@@ -57,16 +57,16 @@ def tokeniser(tokenInfo):
 					tempTokenBeingSorted.append(tokenBeingSorted["content"][chars+1])
 				else:
 					tokensToClassify.append({
-						"content": tempTokenBeingSorted
-						"start_index": tempStartIndex
+						"content": tempTokenBeingSorted,
+						"start_index": tempStartIndex,
 						"end_index": tempStartIndex + len(tempTokenBeingSorted) - 1
 						})
 					tempStartIndex += len(tempTokenBeingSorted)
 					tempTokenBeingSorted = tokenBeingSorted["content"][chars+1]
 
 			tokensToClassify.append({
-				"content": tempTokenBeingSorted
-				"start_index": tempStartIndex
+				"content": tempTokenBeingSorted,
+				"start_index": tempStartIndex,
 				"end_index": tempStartIndex + len(tempTokenBeingSorted) - 1
 				})
 
