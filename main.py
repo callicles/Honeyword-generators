@@ -1,6 +1,7 @@
 from constants import MAX_LEET_CHAR, ENGLISH_INDEX, LEET_REVERSE_MAPPER
 import pprint
 import mutators.numbers
+import mutators.strings
 
 pp = pprint.PrettyPrinter(indent=1)
 
@@ -80,3 +81,5 @@ print mutators.numbers.mutate_all_odds("135")
 print mutators.numbers.mutate_all_even("028")
 print mutators.numbers.mutate_random("2398")
 print mutators.numbers.mutate_sequence("2345")
+
+print mutators.strings.mutate_leet_speak("another")
