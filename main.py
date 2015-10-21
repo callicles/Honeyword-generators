@@ -2,6 +2,8 @@ from constants import MAX_LEET_CHAR, ENGLISH_INDEX, LEET_REVERSE_MAPPER
 import pprint
 import mutators.numbers
 import mutators.strings
+import tokeniser
+import generators
 
 pp = pprint.PrettyPrinter(indent=1)
 

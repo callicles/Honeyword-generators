@@ -21,9 +21,10 @@ def change_semantic_word(word):
         for hyponym in synset.hyponyms():
             for lemma in hyponym.lemma_names():
                 words.append(lemma.replace('_', ''))
+
     shuffle(words)
 
-    return words[:1][0]
+    return str(words[0])
 
 
 def mutate_random(word, length=-1):
@@ -75,6 +76,24 @@ def change_syntactic_word(word):
     :return: other word that is syntactically close to the first one
     """
     # TODO with word net or dictionary
+    min = 999999
+    words = []
+
+    for line in open("resources/englishWords.txt"):
+        ed = editdistance.eval(line[:-1],word)
+        if(ed < min and ed != 0):
+            min = ed
+
+    for line in open("resources/englishWords.txt"):
+        ed = editdistance.eval(line[:-1],word)
+        if(ed == min):
+            words.append(line[:-1])
+
+    #print words
+
+    shuffle(words)
+
+    return words[0]
 
 
 def mutate_leet_speak(word):

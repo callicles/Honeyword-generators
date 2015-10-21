@@ -4,7 +4,7 @@ def tokeniser(tokenInfo):
 	"""
 	Accepts a dictionary from models.py and maps the remaining parts of the source password.
 	Goes through the reamining tokens and classifies them.
-	Adds key - value pairs to the original dictionary under new classifications.
+	Adds key - value pairs to the original dictionary under new classifications as defined in classifier in classifer.
 	"""
 
 	source_pass = tokenInfo["source_pass"]
