@@ -1,4 +1,5 @@
 import random
+import string
 
 __author__ = 'nicolas'
 
@@ -51,3 +52,17 @@ def mutate_all_even(even_numbers):
         new_numbers += str(random.choice(range(0, 9, 2)))
 
     return new_numbers
+
+
+def mutate_constant(numbers):
+    """ changes a sequence of constant string "1111" in another constant
+    string
+    :param numbers: String to be changed
+    :return: constant string of the same length
+    """
+    char = string.digits[random.randint(0, 9)]
+    new_sequence = ""
+    for i in range(0, len(numbers)):
+        new_sequence += char
+
+    return new_sequence

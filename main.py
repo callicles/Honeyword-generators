@@ -83,3 +83,8 @@ print mutators.numbers.mutate_random("2398")
 print mutators.numbers.mutate_sequence("2345")
 
 print mutators.strings.mutate_leet_speak("another")
+print mutators.strings.mutate_sequence("abc")
+print mutators.strings.change_semantic_word("another")
+print mutators.strings.mutate_constant("aaaa")
+print mutators.strings.mutate_random("lashdkj")
+print mutators.strings.mutate_caps("test")
