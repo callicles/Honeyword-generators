@@ -1,4 +1,4 @@
-import classifier
+from classifier import classifier, isOnlySpecialCharacters, classifyCharacter
 
 def tokeniser(tokenInfo):
 	"""

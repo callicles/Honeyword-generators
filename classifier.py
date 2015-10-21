@@ -1,8 +1,5 @@
 from constants import ENGLISH_INDEX
 
-#for word in dictionary["tokens"]["words"]
-#	word["content"] = abcd
-
 def isInAlphabeticalSequence(word):
 	""" 
 	Checks if the string passed to it is in an alphabetical sequence
@@ -55,7 +52,7 @@ def isInSequence(word):
 	if len(word)<3:
 		return False
 	else:
-		increment = word[i] - word[i+1]
+		increment = word[0] - word[1]
 		for i in range(len(word) - 2):
 			if word[i+1] - word[i+2] != increment:
 				return False
