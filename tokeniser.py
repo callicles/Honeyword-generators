@@ -1,4 +1,4 @@
-from classifier import classifier, isOnlySpecialCharacters, classifyCharacter
+import classifier
 
 def tokeniser(tokenInfo):
 	"""
@@ -14,6 +14,7 @@ def tokeniser(tokenInfo):
 	wordStartIndex = []
 	wordEndIndex = []
 
+	#Going through the words identified in the input and saving their start and end index in an array to use later
 	for word in tokenInfo["tokens"]["words"]:
 		wordStartIndex.append(word["start_index"])
 		wordEndIndex.append(word["end_index"])
@@ -23,6 +24,7 @@ def tokeniser(tokenInfo):
 	count = 0
 	tempTokenStartIndex = 0
 
+	#Go through the given source password and save the unclassified parts of the string as tokens to be sorted
 	while index<len(source_pass):
 		if wordStartIndex[count] == index:
 			index = wordEndIndex[count]+1
@@ -38,8 +40,8 @@ def tokeniser(tokenInfo):
 		else:
 			tempToken.append(source_pass[index])
 
+	#
 	for tokenBeingSorted in tokensToSort:
-
 		if tokenBeingSorted["content"].isalpha() or tokenBeingSorted["content"].isdigit() or isOnlySpecialCharacters(tokenBeingSorted["content"]) or len(tokenBeingSorted["content"])==1:
 			tokensToClassify.append({
 				"content": tokenBeingSorted["content"],
