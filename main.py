@@ -11,10 +11,10 @@ def main(password):
 
     for i in range(10):
         nicolasObject = password_leaner(password)
-        pp.pprint(nicolasObject)
+        #pp.pprint(nicolasObject)
         rishavObject = tokeniser(nicolasObject)
         markObject = generators.generateHoneyWord(rishavObject)
-    
+
         pp.pprint(markObject)
 
 """
