@@ -7,6 +7,17 @@ import generators
 
 pp = pprint.PrettyPrinter(indent=1)
 
+def main(password):
+
+    nicolasObject = password_leaner(password)
+    rishavObject = tokeniser.tokeniser(nicolasObject)
+
+    for i in range(1000):
+        markObject = generators.generateHoneyWord(rishavObject)
+
+        #pp.pprint(rishavObject)
+        pp.pprint(markObject)
+
 
 def password_leaner(password):
     """ Returns an understandable password
@@ -77,7 +88,9 @@ def password_leaner(password):
     }
 
 
+main("hello123")
 
+"""
 pp.pprint(password_leaner("!!n0t.@n0th3r.d@mn.p@$$w0rd!!"))
 print mutators.numbers.mutate_all_odds("135")
 print mutators.numbers.mutate_all_even("028")
@@ -89,4 +102,4 @@ print mutators.strings.mutate_sequence("abc")
 print mutators.strings.change_semantic_word("another")
 print mutators.strings.mutate_constant("aaaa")
 print mutators.strings.mutate_random("lashdkj")
-print mutators.strings.mutate_caps("test")
+print mutators.strings.mutate_caps("test")"""

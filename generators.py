@@ -1,19 +1,20 @@
 import mutators.numbers
 import mutators.strings
 import random
+import collections
 
 def generateHoneyWord(password):
     for token in password['tokens']:
         if(token == 'words'):
             for word in password['tokens'][token]:
                 apply_word_mutation(word)
-        if(token == 'sequence_strings'):
+        if(token == 'same_sequence_letters' or token == 'sequence_letters'):
             for string_sequence in password['tokens'][token]:
                 apply_string_sequence_mutation(string_sequence)
-        if(token == 'random_strings'):
+        if(token == 'random_letters' or token == 'same_sequence_specialchars' or token == 'random_specialchars'):
             for random_string in password['tokens'][token]:
                 apply_random_string_mutation(random_string)
-        if(token == 'number_sequence'):
+        if(token == 'same_sequence_numbers' or token == 'sequence_numbers'):
             for number_sequence in password['tokens'][token]:
                 apply_number_sequence_mutation(number_sequence)
         if(token == 'random_numbers'):
@@ -80,7 +81,7 @@ def apply_word_mutation(word):
         word['content'] = mutators.strings.change_semantic_word(word['content'])
 
     rnd = random.random()
-    if(rnd < 0.4):
+    if(rnd < 0.001):
          word['content'] = mutators.strings.mutate_caps(word['content'])
-    if(rnd > 0.8):
+    if(rnd > 0.999):
         word['content'] = mutators.strings.mutate_caps(word['content'])

@@ -3,8 +3,9 @@ import string
 from textblob import Word
 from random import shuffle, randint, choice
 from constants import LEET_MAPPER
+import editdistance
 
-nltk.download('wordnet')
+#nltk.download('wordnet')
 
 
 def change_semantic_word(word):
@@ -23,7 +24,8 @@ def change_semantic_word(word):
                 words.append(lemma.replace('_', ''))
 
     shuffle(words)
-
+    if len(words) == 0:
+        return ''
     return str(words[0])
 
 

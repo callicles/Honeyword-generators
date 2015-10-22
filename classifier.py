@@ -8,7 +8,7 @@ def isInAlphabeticalSequence(word):
         return False
     else:
         for i in range(len(word) - 1):
-            if word[i] != word[i + 1] + 1:
+            if ord(word[i]) != ord(word[i + 1]) + 1:
                 return False
         return True
 
@@ -20,7 +20,7 @@ def isInReverseAlphabeticalSequence(word):
         return False
     else:
         for i in range(len(word) - 1):
-            if word[i] != word[i + 1] - 1:
+            if ord(word[i]) != ord(word[i + 1]) - 1:
                 return False
         return True
 
@@ -52,9 +52,9 @@ def isInSequence(word):
 	if len(word)<3:
 		return False
 	else:
-		increment = word[0] - word[1]
+		increment = int(word[0]) - int(word[1])
 		for i in range(len(word) - 2):
-			if word[i+1] - word[i+2] != increment:
+			if int(word[i+1]) - int(word[i+2]) != increment:
 				return False
 		return True
 
