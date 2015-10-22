@@ -78,6 +78,10 @@ def change_syntactic_word(word):
     :return: other word that is syntactically close to the first one
     """
     # TODO with word net or dictionary
+
+    if True:
+        return word
+
     min = 999999
     words = []
 

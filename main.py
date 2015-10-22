@@ -9,12 +9,10 @@ pp = pprint.PrettyPrinter(indent=1)
 
 def main(password):
 
-    nicolasObject = password_leaner(password)
-    rishavObject = tokeniser.tokeniser(nicolasObject)
-
-    for i in range(1000):
+    for i in range(10):
+        nicolasObject = password_leaner(password)
+        rishavObject = tokeniser.tokeniser(nicolasObject)
         markObject = generators.generateHoneyWord(rishavObject)
-
         #pp.pprint(rishavObject)
         pp.pprint(markObject)
 
@@ -28,6 +26,7 @@ def password_leaner(password):
     """
 
     # Replacing the characters in the password by their leet equivalent
+    password = password.lower()
     linted_pass = ""
     for i in range(0, len(password)):
         found_match = ""
@@ -88,7 +87,7 @@ def password_leaner(password):
     }
 
 
-main("hello123")
+main("Twirler1")
 
 """
 pp.pprint(password_leaner("!!n0t.@n0th3r.d@mn.p@$$w0rd!!"))

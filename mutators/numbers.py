@@ -9,6 +9,10 @@ def mutate_sequence(number_sequence):
     :param number_sequence: String representing a sequence
     :return: String representing a different sequence
     """
+
+    if(number_sequence == ''):
+        return ''
+
     sequence_padding = int(number_sequence[1]) - int(number_sequence[0])
     new_sequence = "" + str(random.randint(0, 9))
 
