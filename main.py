@@ -12,9 +12,9 @@ pp = pprint.PrettyPrinter(indent=1)
 def justGetPassword(password):
 
     count = 0
-    for i in range(len(password)-1,0,-1):
-        if(password[i] != ' '):
-            count+=1
+    for i in range(len(password)-1, 0, -1):
+        if password[i] != ' ':
+            count += 1
         else:
             break
 
