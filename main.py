@@ -4,47 +4,40 @@ import mutators
 from algorithms.password_leaner import password_leaner
 from algorithms.tokeniser import tokeniser
 from algorithms import generators
+from random import shuffle
 
 pp = pprint.PrettyPrinter(indent=1)
 
 
-def main(password):
+def main(password, number):
 
-    for i in range(10):
+    honeywords = [password]
+
+    for i in range(number):
         nicolasObject = password_leaner(password)
         #pp.pprint(nicolasObject)
         rishavObject = tokeniser(nicolasObject)
         markObject = generators.generateHoneyWord(rishavObject)
 
+        honeywords.append(markObject)
         pp.pprint(markObject)
 
-"""
+    shuffle(honeywords)
+    return honeywords
+
+
 parser = argparse.ArgumentParser(description='Generate honey words from a list '
                                              'of passwords')
 
-parser.add_argument('N',
-                    metavar='n',
-                    nargs='1',
-                    type=int,
-                    help='number of sweet words to be generated'
-                         ' list')
-
-parser.add_argument('input_passwords_file',
-                    metavar='input',
-                    nargs='1',
-                    help='The file with the passwords to put transform into'
-                         ' honey words')
-
-parser.add_argument('output_passwords_file',
-                    metavar='input',
-                    nargs='1',
-                    help='The file with the passwords to put the honey words in'
-                         ' list')
+parser.add_argument('n', type=int)
+parser.add_argument('input_passwords_file', type=file)
+parser.add_argument('output_passwords_file', type=argparse.FileType('w+'))
 
 args = parser.parse_args()
-"""
 
-main("12345example")
+for password in args.input_passwords_file:
+    args.output_passwords_file.write(",".join(main(password, args.n))+"\n")
+
 
 """
 pp.pprint(password_leaner("!!n0t.@n0th3r.d@mn.p@$$w0rd!!"))

@@ -45,6 +45,14 @@ def password_leaner(password):
 
     # Finding the words that are significant in the found words
     found_words = sorted(found_words, key=lambda k: k['start_index'])
+
+    if len(found_words) == 0:
+        return {
+            "source_pass": password,
+            "mapped_pass": linted_pass,
+            "tokens": {}
+        }
+
     significant_words = [found_words[0]]
     pointer = 0
 
