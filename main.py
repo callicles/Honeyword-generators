@@ -42,9 +42,10 @@ def main(password, number):
         rishavObject = tokeniser(nicolasObject)
         markObject = generators.generateHoneyWord(rishavObject, database)
         #pp.pprint(rishavObject)
-        pp.pprint(markObject)
+        honeywords.append(markObject.strip())
 
     shuffle(honeywords)
+    print honeywords
     return honeywords
 
 
@@ -58,7 +59,10 @@ parser.add_argument('output_passwords_file', type=argparse.FileType('w+'))
 args = parser.parse_args()
 
 for password in args.input_passwords_file:
-    args.output_passwords_file.write(",".join(main(password, args.n)) + "\n")
+    for honey in main(password, args.n):
+        args.output_passwords_file.write(honey + ",")
+    args.output_passwords_file.write("\n")
+
 
 """
 pp.pprint(password_leaner("!!n0t.@n0th3r.d@mn.p@$$w0rd!!"))
