@@ -1,34 +1,8 @@
 import string
 from random import shuffle, randint, choice
-
-from textblob import Word
 import editdistance
 
 from algorithms.constants import LEET_MAPPER
-
-
-#nltk.download('wordnet')
-
-
-def change_semantic_word(word):
-    """ Get another word close to the requested word to replace it
-    :param word: Word to replace
-    :return: new word
-    """
-    word = Word(word)
-    words = []
-
-    for synset in word.synsets[:]:
-        for synonym in synset.lemma_names():
-            words.append(synonym.replace('_', ''))
-        for hyponym in synset.hyponyms():
-            for lemma in hyponym.lemma_names():
-                words.append(lemma.replace('_', ''))
-
-    shuffle(words)
-    if len(words) == 0:
-        return ''
-    return str(words[0])
 
 
 def mutate_random(word, length=-1):
