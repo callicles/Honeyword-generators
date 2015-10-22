@@ -35,11 +35,13 @@ def password_leaner(password):
     for word, bool in ENGLISH_INDEX.iteritems():
         index = linted_pass.find(word)
         if index != -1 and len(word) > 0:
-            found_words.append({
-                "content": word,
-                "start_index": index,
-                "end_index": index + len(word) - 1
-            })
+            if (index > 0 and not password[index-1].isdigit() and not
+                    password[index].isdigit()) or index == 0:
+                found_words.append({
+                    "content": word,
+                    "start_index": index,
+                    "end_index": index + len(word) - 1
+                })
 
     # Finding the words that are significant in the found words
     found_words = sorted(found_words, key=lambda k: k['start_index'])
