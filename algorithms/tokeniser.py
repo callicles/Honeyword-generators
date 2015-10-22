@@ -4,86 +4,94 @@ import pprint
 pp = pprint.PrettyPrinter(indent=1)
 
 def tokeniser(tokenInfo):
-	"""
-	Accepts a dictionary from models.py and maps the remaining parts of the source password.
-	Goes through the reamining tokens and classifies them.
-	Adds key - value pairs to the original dictionary under new classifications as defined in classifier in classifer.
-	"""
+    """
+    Accepts a dictionary from models.py and maps the remaining parts of the source password.
+    Goes through the reamining tokens and classifies them.
+    Adds key - value pairs to the original dictionary under new classifications as defined in classifier in classifer.
+    """
 
-	source_pass = tokenInfo["source_pass"]
-	tokensToSort = []
-	tokensToClassify = []
+    source_pass = tokenInfo["source_pass"]
+    tokensToSort = []
+    tokensToClassify = []
 
-	wordStartIndex = []
-	wordEndIndex = []
+    wordStartIndex = []
+    wordEndIndex = []
 
-	#Going through the words identified in the input and saving their start and end index in an array to use later
-	for word in tokenInfo["tokens"]["words"]:
-		wordStartIndex.append(word["start_index"])
-		wordEndIndex.append(word["end_index"])
+    #Going through the words identified in the input and saving their start and end index in an array to use later
+    if "words" not in tokenInfo["tokens"].keys():
+        tokensToSort.append({
+            "content": source_pass,
+            "start_index": 0,
+            "end_index": len(source_pass) - 1
+            })
 
-	tempTokenStartIndex = 0
-	tempToken = ''
-	for i in range(len(wordStartIndex)):
-		tempToken = source_pass[tempTokenStartIndex:wordStartIndex[i]]
-		if tempToken != '':
-			tokensToSort.append({
-					"content": tempToken,
-					"start_index": tempTokenStartIndex,
-					"end_index": wordStartIndex[i]-1
-				})
-		tempTokenStartIndex = wordEndIndex[i] + 1
+    else:
+        for word in tokenInfo["tokens"]["words"]:
+            wordStartIndex.append(word["start_index"])
+            wordEndIndex.append(word["end_index"])
 
-	if len(source_pass) > (wordEndIndex[len(wordEndIndex)-1] + 1):
-		tempToken = source_pass[wordEndIndex[len(wordEndIndex)-1]+1:len(source_pass)]
-		tokensToSort.append({
-					"content": tempToken,
-					"start_index": wordEndIndex[len(wordEndIndex)-1],
-					"end_index": len(source_pass)-1
-				})
+        tempTokenStartIndex = 0
+        tempToken = ''
+        for i in range(len(wordStartIndex)):
+            tempToken = source_pass[tempTokenStartIndex:wordStartIndex[i]]
+            if tempToken != '':
+                tokensToSort.append({
+                        "content": tempToken,
+                        "start_index": tempTokenStartIndex,
+                        "end_index": wordStartIndex[i] - 1
+                    })
+            tempTokenStartIndex = wordEndIndex[i] + 1
 
-	#pp.pprint(tokensToSort)
+        if len(source_pass) > (wordEndIndex[len(wordEndIndex) - 1] + 1):
+            tempToken = source_pass[wordEndIndex[len(wordEndIndex)-1]+1:len(source_pass)]
+            tokensToSort.append({
+                        "content": tempToken,
+                        "start_index": wordEndIndex[len(wordEndIndex) - 1],
+                        "end_index": len(source_pass) - 1
+                    })
 
-	for tokenBeingSorted in tokensToSort:
-		if tokenBeingSorted["content"].isalpha() or tokenBeingSorted["content"].isdigit() or isOnlySpecialCharacters(tokenBeingSorted["content"]) or len(tokenBeingSorted["content"])==1:
-			tokensToClassify.append({
-				"content": tokenBeingSorted["content"],
-				"start_index": tokenBeingSorted["start_index"],
-				"end_index": tokenBeingSorted["end_index"]
-			})
-		else:
-			tempTokenBeingSorted = tokenBeingSorted["content"][0]
-			tempStartIndex = tokenBeingSorted["start_index"]
+    #pp.pprint(tokensToSort)
 
-			for chars in range(len(tokenBeingSorted["content"]) -1):
-				if classifyCharacter(tokenBeingSorted["content"][chars]) == classifyCharacter(tokenBeingSorted["content"][chars+1]):
-					tempTokenBeingSorted+=(tokenBeingSorted["content"][chars+1])
-				else:
-					tokensToClassify.append({
-						"content": tempTokenBeingSorted,
-						"start_index": tempStartIndex,
-						"end_index": tempStartIndex + len(tempTokenBeingSorted) - 1
-					})
-					tempStartIndex += len(tempTokenBeingSorted)
-					tempTokenBeingSorted = tokenBeingSorted["content"][chars+1]
+    for tokenBeingSorted in tokensToSort:
+        if tokenBeingSorted["content"].isalpha() or tokenBeingSorted["content"].isdigit() or isOnlySpecialCharacters(tokenBeingSorted["content"]) or len(tokenBeingSorted["content"])==1:
+            tokensToClassify.append({
+                "content": tokenBeingSorted["content"],
+                "start_index": tokenBeingSorted["start_index"],
+                "end_index": tokenBeingSorted["end_index"]
+            })
+        else:
+            tempTokenBeingSorted = tokenBeingSorted["content"][0]
+            tempStartIndex = tokenBeingSorted["start_index"]
 
-			tokensToClassify.append({
-				"content": tempTokenBeingSorted,
-				"start_index": tempStartIndex,
-				"end_index": tempStartIndex + len(tempTokenBeingSorted) - 1
-			})
+            for chars in range(len(tokenBeingSorted["content"]) -1):
+                if classifyCharacter(tokenBeingSorted["content"][chars]) == classifyCharacter(tokenBeingSorted["content"][chars+1]):
+                    tempTokenBeingSorted+=(tokenBeingSorted["content"][chars+1])
+                else:
+                    tokensToClassify.append({
+                        "content": tempTokenBeingSorted,
+                        "start_index": tempStartIndex,
+                        "end_index": tempStartIndex + len(tempTokenBeingSorted) - 1
+                    })
+                    tempStartIndex += len(tempTokenBeingSorted)
+                    tempTokenBeingSorted = tokenBeingSorted["content"][chars+1]
 
-	for token in tokensToClassify:
+            tokensToClassify.append({
+                "content": tempTokenBeingSorted,
+                "start_index": tempStartIndex,
+                "end_index": tempStartIndex + len(tempTokenBeingSorted) - 1
+            })
 
-		unclassifiedToken = token["content"]
-		classification = classifier(unclassifiedToken)
-		if classification not in tokenInfo["tokens"]:
-			tokenInfo["tokens"][classification] = []
+    for token in tokensToClassify:
 
-		tokenInfo["tokens"][classification].append({
-		"content": unclassifiedToken,
-		"start_index": token["start_index"],
-		"end_index": token["end_index"]
-		})
+        unclassifiedToken = token["content"]
+        classification = classifier(unclassifiedToken)
+        if classification not in tokenInfo["tokens"]:
+            tokenInfo["tokens"][classification] = []
 
-	return tokenInfo
+        tokenInfo["tokens"][classification].append({
+        "content": unclassifiedToken,
+        "start_index": token["start_index"],
+        "end_index": token["end_index"]
+        })
+
+    return tokenInfo

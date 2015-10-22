@@ -25,49 +25,49 @@ def isInReverseAlphabeticalSequence(word):
         return True
 
 def isSameCharacterSequence(word):
-	"""
-	Checks if the string passed to it is in a sequence of identical characters
-	"""
-	if len(word) == 1:
-		return False
-	else:
-		for i in range(len(word) - 1):
-			if word[i] != word[i + 1]:
-				return False
-		return True
+    """
+    Checks if the string passed to it is in a sequence of identical characters
+    """
+    if len(word) == 1:
+        return False
+    else:
+        for i in range(len(word) - 1):
+            if word[i] != word[i + 1]:
+                return False
+        return True
 
 def isOnlySpecialCharacters(word):
-	"""
-	Checks if the string passed is comprised entirely of special characters typically allowed in passwords
-	"""
-	for i in range(len(word)):
-		if word[i].isalpha() or word[i].isdigit():
-			return False
-	return True
+    """
+    Checks if the string passed is comprised entirely of special characters typically allowed in passwords
+    """
+    for i in range(len(word)):
+        if word[i].isalpha() or word[i].isdigit():
+            return False
+    return True
 
 def isInSequence(word):
-	"""
-	Checks if the string passed is a sequence of digits logically connected ("e.g. 369")
-	"""
-	if len(word)<3:
-		return False
-	else:
-		increment = int(word[0]) - int(word[1])
-		for i in range(len(word) - 2):
-			if int(word[i+1]) - int(word[i+2]) != increment:
-				return False
-		return True
+    """
+    Checks if the string passed is a sequence of digits logically connected ("e.g. 369")
+    """
+    if len(word)<3:
+        return False
+    else:
+        increment = int(word[0]) - int(word[1])
+        for i in range(len(word) - 2):
+            if int(word[i+1]) - int(word[i+2]) != increment:
+                return False
+        return True
 
 def classifyCharacter(word):
-	"""
-	Classifies the passed single character string into an alphabet, number, or special character
-	"""
-	if word[0].isalpha():
-		return "isalpha"
-	elif word[0].isalpha():
-		return "isdigit"
-	else:
-		return "isspecialchar"
+    """
+    Classifies the passed single character string into an alphabet, number, or special character
+    """
+    if word[0].isalpha():
+        return "isalpha"
+    elif word[0].isalpha():
+        return "isdigit"
+    else:
+        return "isspecialchar"
 
 def classifier(token):
 
