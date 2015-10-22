@@ -98,7 +98,10 @@ def apply_word_mutation(word, database):
         word['content'] = word['content']
 
     rnd = random.random()
-    if(rnd < 0.99):
+    if(rnd < 0.6):
          word['content'] = mutators.strings.mutate_caps(word['content'])
-    if(rnd >= 0.99):
+    elif(rnd >= 0.6 and rnd <= 0.8):
+        word['content'] = mutators.strings.mutate_leet_speak(word['content'])
+    else:
+        word['content'] = mutators.strings.mutate_caps(word['content'])
         word['content'] = mutators.strings.mutate_leet_speak(word['content'])
