@@ -1,4 +1,4 @@
-from constants import ENGLISH_INDEX
+
 
 def isInAlphabeticalSequence(word):
     """
@@ -12,6 +12,7 @@ def isInAlphabeticalSequence(word):
                 return False
         return True
 
+
 def isInReverseAlphabeticalSequence(word):
     """
     Checks if the string passed to it is in a reverse alphabetical sequence
@@ -23,6 +24,7 @@ def isInReverseAlphabeticalSequence(word):
             if ord(word[i]) != ord(word[i + 1]) - 1:
                 return False
         return True
+
 
 def isSameCharacterSequence(word):
     """
@@ -36,6 +38,7 @@ def isSameCharacterSequence(word):
                 return False
         return True
 
+
 def isOnlySpecialCharacters(word):
     """
     Checks if the string passed is comprised entirely of special characters typically allowed in passwords
@@ -44,6 +47,7 @@ def isOnlySpecialCharacters(word):
         if word[i].isalpha() or word[i].isdigit():
             return False
     return True
+
 
 def isInSequence(word):
     """
@@ -58,6 +62,7 @@ def isInSequence(word):
                 return False
         return True
 
+
 def classifyCharacter(word):
     """
     Classifies the passed single character string into an alphabet, number, or special character
@@ -69,8 +74,8 @@ def classifyCharacter(word):
     else:
         return "isspecialchar"
 
-def classifier(token):
 
+def classifier(token):
     """ Classifies the given token into one of several categories.
     categories currently defined are:
         same_sequence_letters: same letter being repeated (e.g. "aaa")

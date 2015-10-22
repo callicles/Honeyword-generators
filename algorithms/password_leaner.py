@@ -1,4 +1,4 @@
-from constants import MAX_LEET_CHAR, ENGLISH_INDEX, LEET_REVERSE_MAPPER
+from constants import MAX_LEET_CHAR, LEET_REVERSE_MAPPER, ENGLISH_INDEX
 
 __author__ = 'nicolas'
 
@@ -30,6 +30,14 @@ def password_leaner(password):
         else:
             linted_pass = linted_pass + password[i]
 
+    return {
+        "source_pass": password,
+        "mapped_pass": linted_pass,
+        "tokens": {}
+    }
+
+    # We bypass the part where we need a dictionary
+    """
     # Finding the words inside the linted password
     found_words = []
     for word, bool in ENGLISH_INDEX.iteritems():
@@ -83,3 +91,4 @@ def password_leaner(password):
             "words": significant_words
         }
     }
+    """
