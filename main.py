@@ -24,6 +24,8 @@ def justGetPassword(password):
 
 def main(password, number):
 
+    password = password.strip()
+
     honeywords = [password]
 
     database = []
@@ -40,7 +42,7 @@ def main(password, number):
     print database[0]
     print len(database)
 
-    for i in range(number):
+    for i in range(number-1):
         nicolasObject = password_leaner(password)
         rishavObject = tokeniser(nicolasObject)
         markObject = generators.generateHoneyWord(rishavObject, database)
@@ -62,9 +64,7 @@ parser.add_argument('output_passwords_file', type=argparse.FileType('w+'))
 args = parser.parse_args()
 
 for password in args.input_passwords_file:
-    for honey in main(password, args.n):
-        args.output_passwords_file.write(honey + ",")
-    args.output_passwords_file.write("\n")
+    args.output_passwords_file.write(",".join(main(password, args.n)) + "\n")
 
 
 """
