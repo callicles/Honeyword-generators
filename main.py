@@ -1,6 +1,7 @@
 import pprint
 import argparse
 import mutators
+import os.path
 from algorithms.password_leaner import password_leaner
 from algorithms.tokeniser import tokeniser
 from algorithms import generators
@@ -25,14 +26,16 @@ def main(password, number):
 
     honeywords = [password]
 
-    database_size = 1000
-    database_count = 1
     database = []
-    for line in open("resources/rockyou-withcount.txt"):
-        database.append(justGetPassword(line[:-1]))
-        database_count += 1
-        if database_count > database_size:
-            break
+
+    if os.path.isfile("resources/rockyou-withcount.txt"):
+        database_count = 1
+
+        for line in open("resources/rockyou-withcount.txt"):
+            database.append(justGetPassword(line[:-1]))
+            database_count += 1
+            if database_count > 100000:
+                break
 
     print database[0]
     print len(database)
