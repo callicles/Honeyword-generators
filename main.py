@@ -7,6 +7,7 @@ from algorithms import generators
 
 pp = pprint.PrettyPrinter(indent=1)
 
+
 def main(password):
 
     for i in range(10):
