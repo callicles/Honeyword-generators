@@ -128,6 +128,9 @@ def mutate_caps(word):
     :param word: string to change caps
     :return: mutated string
     """
+    if len(word) < 2:
+        return word
+
     # We only want to change maximum half of the word
     number_of_changes = randint(1, len(word) / 2)
     written_changes = 0
