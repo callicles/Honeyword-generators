@@ -92,7 +92,7 @@ def apply_string_sequence_same_mutation(word):
 
 def apply_word_mutation(word, database):
     rnd = random.random()
-    if(rnd < 0.5):
+    if(rnd < 0.5 and len(database)>0):
         word['content'] = mutators.strings.change_syntactic_word(word['content'], database)
     else:
         word['content'] = word['content']
