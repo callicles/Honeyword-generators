@@ -79,6 +79,10 @@ def change_syntactic_word(word):
     :param word: word to be changed
     :return: other word that is syntactically close to the first one
     """
+
+    if True:
+        return word
+
     min = 999999
     words = []
 

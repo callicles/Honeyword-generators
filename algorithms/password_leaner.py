@@ -11,6 +11,8 @@ def password_leaner(password):
     work on the meaning instead of its written implementation
     """
 
+    password = password.lower()
+
     # Replacing the characters in the password by their leet equivalent
     linted_pass = ""
     for i in range(0, len(password)):

@@ -9,12 +9,10 @@ pp = pprint.PrettyPrinter(indent=1)
 
 def main(password):
 
-    nicolasObject = password_leaner(password)
-    rishavObject = tokeniser(nicolasObject)
-
-    for i in range(1000):
+    for i in range(10):
+        nicolasObject = password_leaner(password)
+        rishavObject = tokeniser(nicolasObject)
         markObject = generators.generateHoneyWord(rishavObject)
-
         #pp.pprint(rishavObject)
         pp.pprint(markObject)
 
@@ -44,7 +42,7 @@ parser.add_argument('output_passwords_file',
 args = parser.parse_args()
 """
 
-main("password123")
+main("Twirler1")
 
 """
 pp.pprint(password_leaner("!!n0t.@n0th3r.d@mn.p@$$w0rd!!"))
