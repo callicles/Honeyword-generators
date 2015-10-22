@@ -3,11 +3,11 @@ import mutators.strings
 import random
 import collections
 
-def generateHoneyWord(password):
+def generateHoneyWord(password, database):
     for token in password['tokens']:
         if(token == 'words'):
             for word in password['tokens'][token]:
-                apply_word_mutation(word)
+                apply_word_mutation(word, database)
         if(token == 'sequence_letters'):
             for string_sequence in password['tokens'][token]:
                 apply_string_sequence_mutation(string_sequence)
@@ -90,15 +90,15 @@ def apply_string_sequence_same_mutation(word):
         word['content'] = mutators.strings.mutate_constant(word['content'])
 
 
-def apply_word_mutation(word):
+def apply_word_mutation(word, database):
     rnd = random.random()
-    if(rnd < 1.0):
-        word['content'] = mutators.strings.change_syntactic_word(word['content'])
+    if(rnd < 0.5):
+        word['content'] = mutators.strings.change_syntactic_word(word['content'], database)
     else:
-        word['content'] = mutators.strings.change_semantic_word(word['content'])
+        word['content'] = word['content']
 
     rnd = random.random()
-    if(rnd <= 0.99):
+    if(rnd < 0.99):
          word['content'] = mutators.strings.mutate_caps(word['content'])
-    if(rnd > 0.99):
+    if(rnd >= 0.99):
         word['content'] = mutators.strings.mutate_leet_speak(word['content'])

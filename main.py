@@ -7,12 +7,37 @@ import generators
 
 pp = pprint.PrettyPrinter(indent=1)
 
+def justGetPassword(password):
+
+    count = 0
+    for i in range(len(password)-1,0,-1):
+        if(password[i] != ' '):
+            count+=1
+        else:
+            break
+
+    return password[len(password)-count:len(password)]
+
+
 def main(password):
+
+    database_size = 1000
+    database_count = 1
+    database = []
+    for line in open("resources/rockyou-withcount.txt"):
+        database.append(justGetPassword(line[:-1]))
+        database_count+=1
+        if database_count > database_size:
+            break
+
+    print database[0]
+    print len(database)
+
 
     for i in range(10):
         nicolasObject = password_leaner(password)
         rishavObject = tokeniser.tokeniser(nicolasObject)
-        markObject = generators.generateHoneyWord(rishavObject)
+        markObject = generators.generateHoneyWord(rishavObject, database)
         #pp.pprint(rishavObject)
         pp.pprint(markObject)
 
@@ -87,7 +112,7 @@ def password_leaner(password):
     }
 
 
-main("Twirler1")
+main("michael")
 
 """
 pp.pprint(password_leaner("!!n0t.@n0th3r.d@mn.p@$$w0rd!!"))

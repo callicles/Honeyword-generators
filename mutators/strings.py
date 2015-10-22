@@ -72,28 +72,25 @@ def mutate_sequence(word):
     return new_sequence
 
 
-def change_syntactic_word(word):
+def change_syntactic_word(word,database):
     """ Change the word in a syntactic manner
     :param word: word to be changed
     :return: other word that is syntactically close to the first one
     """
     # TODO with word net or dictionary
 
-    if True:
-        return word
-
     min = 999999
     words = []
 
-    for line in open("resources/englishWords.txt"):
-        ed = editdistance.eval(line[:-1],word)
+    for line in database:  #englishWords.txt"):
+        ed = editdistance.eval(line,word)
         if(ed < min and ed != 0):
             min = ed
 
-    for line in open("resources/englishWords.txt"):
-        ed = editdistance.eval(line[:-1],word)
-        if(ed == min):
-            words.append(line[:-1])
+    for line in database:
+        ed = editdistance.eval(line,word)
+        if(ed - min  < 3 and ed - min > - 3 ):
+            words.append(line)
 
     #print words
 
