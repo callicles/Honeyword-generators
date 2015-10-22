@@ -9,17 +9,39 @@ from random import shuffle
 pp = pprint.PrettyPrinter(indent=1)
 
 
+def justGetPassword(password):
+
+    count = 0
+    for i in range(len(password)-1,0,-1):
+        if(password[i] != ' '):
+            count+=1
+        else:
+            break
+
+    return password[len(password)-count:len(password)]
+
+
 def main(password, number):
 
     honeywords = [password]
 
+    database_size = 1000
+    database_count = 1
+    database = []
+    for line in open("resources/rockyou-withcount.txt"):
+        database.append(justGetPassword(line[:-1]))
+        database_count += 1
+        if database_count > database_size:
+            break
+
+    print database[0]
+    print len(database)
+
     for i in range(number):
         nicolasObject = password_leaner(password)
-        #pp.pprint(nicolasObject)
         rishavObject = tokeniser(nicolasObject)
-        markObject = generators.generateHoneyWord(rishavObject)
-
-        honeywords.append(markObject)
+        markObject = generators.generateHoneyWord(rishavObject, database)
+        #pp.pprint(rishavObject)
         pp.pprint(markObject)
 
     shuffle(honeywords)
@@ -36,8 +58,7 @@ parser.add_argument('output_passwords_file', type=argparse.FileType('w+'))
 args = parser.parse_args()
 
 for password in args.input_passwords_file:
-    args.output_passwords_file.write(",".join(main(password, args.n))+"\n")
-
+    args.output_passwords_file.write(",".join(main(password, args.n)) + "\n")
 
 """
 pp.pprint(password_leaner("!!n0t.@n0th3r.d@mn.p@$$w0rd!!"))
