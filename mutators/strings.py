@@ -112,7 +112,11 @@ def mutate_leet_speak(word):
 
     for c in word:
         if randint(0, 1) == 1 and written_changes < number_of_changes:
-            new_string += LEET_MAPPER[c][0]
+            if len(LEET_MAPPER[c][0]) == 1:
+                new_string += LEET_MAPPER[c][0]
+                written_changes += 1
+            else:
+                new_string += c
         else:
             new_string += c
 
