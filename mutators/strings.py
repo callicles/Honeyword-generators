@@ -48,7 +48,7 @@ def mutate_sequence(word):
     return new_sequence
 
 
-def change_syntactic_word(word,database):
+def change_syntactic_word(word, database):
     """ Change the word in a syntactic manner
     :param word: word to be changed
     :return: other word that is syntactically close to the first one
@@ -79,6 +79,9 @@ def mutate_leet_speak(word):
     :param word: string to be mutated
     :return: Leet speak string
     """
+    if len(word) < 2:
+        return word
+
     # We only want to change maximum half of the word
     number_of_changes = randint(1, len(word) / 2)
     written_changes = 0
