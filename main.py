@@ -40,8 +40,10 @@ parser.add_argument('output_passwords_file',
                     nargs='1',
                     help='The file with the passwords to put the honey words in'
                          ' list')
+
+args = parser.parse_args()
 """
-# args = parser.parse_args()
+
 main("password123")
 
 """
