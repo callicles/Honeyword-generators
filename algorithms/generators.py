@@ -85,3 +85,4 @@ def apply_word_mutation(word):
          word['content'] = mutators.strings.mutate_caps(word['content'])
     if(rnd > 0.999):
         word['content'] = mutators.strings.mutate_caps(word['content'])
+        

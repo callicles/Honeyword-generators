@@ -1,9 +1,11 @@
-import nltk
 import string
-from textblob import Word
 from random import shuffle, randint, choice
-from constants import LEET_MAPPER
+
+from textblob import Word
 import editdistance
+
+from algorithms.constants import LEET_MAPPER
+
 
 #nltk.download('wordnet')
 
@@ -77,7 +79,6 @@ def change_syntactic_word(word):
     :param word: word to be changed
     :return: other word that is syntactically close to the first one
     """
-    # TODO with word net or dictionary
     min = 999999
     words = []
 
@@ -119,7 +120,7 @@ def mutate_leet_speak(word):
 
 def mutate_caps(word):
     """ Change caps in the string
-    :param string: string to change caps
+    :param word: string to change caps
     :return: mutated string
     """
     # We only want to change maximum half of the word
