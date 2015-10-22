@@ -88,7 +88,8 @@ def mutate_leet_speak(word):
     new_string = ""
 
     for c in word:
-        if randint(0, 1) == 1 and written_changes < number_of_changes:
+        c = c.lower()
+        if not c.isdigit() and randint(0, 1) == 1 and written_changes < number_of_changes:
             if len(LEET_MAPPER[c][0]) == 1:
                 new_string += LEET_MAPPER[c][0]
                 written_changes += 1
